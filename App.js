@@ -14,6 +14,7 @@ import { HomeScreen } from './src/screens/HomeScreen';
 import { ListNotepadScreen } from './src/screens/ListNotepadScreen';
 import { ProExperienceScreen } from './src/screens/ProExperienceScreen';
 import { ViewNotepadScreen } from './src/screens/ViewNotepadScreen';
+import { EditNotepadScreen } from './src/screens/EditNotepadScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -70,6 +71,18 @@ export default function App() {
             options={{
               headerTitle: textsLabel.viewNotepadLabel,
               drawerLabel: textsLabel.viewNotepadLabel,
+              drawerItemStyle: {
+                height: 0,
+              },
+            }}
+          />
+
+          <Drawer.Screen
+            name={screens.editNotepad}
+            component={EditNotepadScreen}
+            options={{
+              headerTitle: textsLabel.editNotepadLabel,
+              drawerLabel: textsLabel.editNotepadLabel,
               drawerItemStyle: {
                 height: 0,
               },

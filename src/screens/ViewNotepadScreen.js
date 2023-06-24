@@ -5,22 +5,21 @@ import Toast from 'react-native-root-toast';
 import { api } from '../../api';
 import screens from '../../assets//json/screens.json';
 
-const initNotepad = {
-  id: 0,
-  title: '',
-  subtitle: '',
-  content: '',
-  created_at: '',
-};
-
 export function ViewNotepadScreen({ navigation, route }) {
   const notepadId = route.params.id;
-  const [notepad, setNotepad] = useState(initNotepad);
-  //const notepadCreatedAt = new Date(notepad.created_at).toLocaleDateString();
+  const [id, setId] = useState(0);
+  const [title, setTitle] = useState('');
+  const [subtitle, setSubtitle] = useState('');
+  const [content, setContent] = useState('');
+  const [createdAt, setCreatedAt] = useState('');
 
   async function loadNotepad() {
     const response = await api.get(`/notepads/${notepadId}`);
-    setNotepad(response.data);
+    setId(response.data.id);
+    setTitle(response.data.title);
+    setSubtitle(response.data.subtitle);
+    setContent(response.data.content);
+    setCreatedAt(new Date(response.data.created_at).toLocaleDateString());
   }
 
   useEffect(() => {
@@ -34,19 +33,44 @@ export function ViewNotepadScreen({ navigation, route }) {
     navigation.navigate(screens.listNotepads);
   }
 
+  function onPressEditNotepad(id) {
+    navigation.navigate(screens.editNotepad, {
+      id,
+    });
+  }
+
+  async function onPressDeleteNotepad() {
+    const response = await api.delete(`/notepads/${notepadId}`);
+    Toast.show('Notepad deletado com sucesso :)');
+    navigation.navigate(screens.listNotepads);
+  }
+
   return (
     <View>
-      <Text>ViewNotepadScreen</Text>
-      <Text>{notepad.title}</Text>
-      <Text>{notepad.subtitle}</Text>
-      <Text>{notepad.content}</Text>
-      <Text>{notepad.id}</Text>
-      <Text>{new Date(notepad.created_at).toLocaleDateString()}</Text>
-      <Text>------------</Text>
+      <Text>
+        ViewNotepadScreen - {id} - {createdAt}
+      </Text>
+      <Text></Text>
+      <Text>{title}</Text>
+      <Text>{subtitle}</Text>
+      <Text>{content}</Text>
+      <Text></Text>
 
       <TouchableOpacity onPress={() => onPressListNotepads()}>
-        <Text></Text>
+        <Text>------------</Text>
         <Text>Voltar</Text>
+        <Text>------------</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => onPressEditNotepad(id)}>
+        <Text>------------</Text>
+        <Text>Editar</Text>
+        <Text>------------</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => onPressDeleteNotepad()}>
+        <Text></Text>
+        <Text>Deletar</Text>
         <Text>------------</Text>
       </TouchableOpacity>
     </View>
