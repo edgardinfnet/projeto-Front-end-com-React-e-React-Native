@@ -13,6 +13,7 @@ import { ContactScreen } from './src/screens/ContactScreen';
 import { HomeScreen } from './src/screens/HomeScreen';
 import { ListNotepadScreen } from './src/screens/ListNotepadScreen';
 import { ProExperienceScreen } from './src/screens/ProExperienceScreen';
+import { ViewNotepadScreen } from './src/screens/ViewNotepadScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -60,6 +61,18 @@ export default function App() {
             options={{
               headerTitle: textsLabel.listNotepadsLabel,
               drawerLabel: textsLabel.listNotepadsLabel,
+            }}
+          />
+
+          <Drawer.Screen
+            name={screens.viewNotepad}
+            component={ViewNotepadScreen}
+            options={{
+              headerTitle: textsLabel.viewNotepadLabel,
+              drawerLabel: textsLabel.viewNotepadLabel,
+              drawerItemStyle: {
+                height: 0,
+              },
             }}
           />
         </Drawer.Navigator>
