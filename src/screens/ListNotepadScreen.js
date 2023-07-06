@@ -38,6 +38,8 @@ export function ListNotepadScreen({ navigation, route }) {
             <Text>{item.subtitle}</Text>
             <Text>{item.content}</Text>
             <Text>{item.id}</Text>
+            <Text>{item.latitude}</Text>
+            <Text>{item.longitude}</Text>
             <Text>{new Date(item.created_at).toLocaleDateString()}</Text>
             <Text>------------</Text>
           </TouchableOpacity>
