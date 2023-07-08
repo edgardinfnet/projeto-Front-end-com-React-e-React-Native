@@ -1,15 +1,12 @@
-import { TouchableOpacity, Text } from 'react-native';
-import styled from 'styled-components/native';
-import { LatLongText } from './LatLongText';
+import { TouchableOpacity } from 'react-native';
+import { TextTitle } from './TextTitle';
+import { TextSubtitle } from './TextSubtitle';
+import { TextCreated_at } from './TextCreated_at';
+import { TextSmall } from './TextSmall';
+import { TextContent } from './TextContent';
+import { CardContainer } from './CardContainer';
 
-const Container = styled.View`
-  padding-horizontal: 12px;
-  padding-vertical: 6px;
-  border-bottom-width: 1px;
-  border-bottom-color: #aaa;
-`;
-
-export function NotepadItem({
+export function Card({
   title,
   subtitle,
   content,
@@ -20,15 +17,19 @@ export function NotepadItem({
 }) {
   return (
     <TouchableOpacity onPress={onPress}>
-      <Container>
-        <Text>{title}</Text>
-        <Text>{subtitle}</Text>
-        <Text>{content}</Text>
-        <Text>{new Date(created_at).toLocaleDateString()}</Text>
-        <LatLongText>
-          latitude: {latitude} / longitude{longitude}
-        </LatLongText>
-      </Container>
+      <CardContainer>
+        <TextTitle>{title}</TextTitle>
+        <TextSubtitle>{subtitle}</TextSubtitle>
+        <TextContent>{content}</TextContent>
+        <TextCreated_at>
+          Criado em: {new Date(created_at).toLocaleDateString()}
+        </TextCreated_at>
+        {latitude && longitude && (
+          <TextSmall>
+            latitude: {latitude} / longitude{longitude}
+          </TextSmall>
+        )}
+      </CardContainer>
     </TouchableOpacity>
   );
 }

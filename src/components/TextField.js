@@ -5,5 +5,5 @@ export const TextInputField = styled.TextInput`
   background-color: #ffffff;
   padding: 6px;
   border-width: 1px;
-  border: 1px solid #dfe6e9;
+  border: 1px solid #3c6382;
 `;

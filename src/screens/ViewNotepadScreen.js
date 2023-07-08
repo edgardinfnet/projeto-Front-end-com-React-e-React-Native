@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, MapMarker } from 'react-native-maps';
-import styled from 'styled-components/native';
 import Toast from 'react-native-root-toast';
 import { api } from '../../api';
 import screens from '../../assets//json/screens.json';
+import { Container } from '../components/Container';
 
 export function ViewNotepadScreen({ navigation, route }) {
   const initialCoords = {
@@ -56,10 +56,6 @@ export function ViewNotepadScreen({ navigation, route }) {
     return unsubscribe;
   }, [notepadId]);
 
-  function onPressListNotepads() {
-    navigation.navigate(screens.listNotepads);
-  }
-
   function onPressEditNotepad(id) {
     navigation.navigate(screens.editNotepad, {
       id,
@@ -72,12 +68,8 @@ export function ViewNotepadScreen({ navigation, route }) {
     navigation.navigate(screens.listNotepads);
   }
 
-  function teste() {
-    alert(JSON.stringify(coords));
-  }
-
   return (
-    <View>
+    <Container>
       <Text>
         ViewNotepadScreen - {id} - {createdAt}
       </Text>
@@ -86,12 +78,6 @@ export function ViewNotepadScreen({ navigation, route }) {
       <Text>{subtitle}</Text>
       <Text>{content}</Text>
       <Text></Text>
-
-      <TouchableOpacity onPress={() => onPressListNotepads()}>
-        <Text>------------</Text>
-        <Text>Voltar</Text>
-        <Text>------------</Text>
-      </TouchableOpacity>
 
       <TouchableOpacity onPress={() => onPressEditNotepad(id)}>
         <Text>------------</Text>
@@ -105,12 +91,6 @@ export function ViewNotepadScreen({ navigation, route }) {
         <Text>------------</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => teste()}>
-        <Text></Text>
-        <Text>teste</Text>
-        <Text>------------</Text>
-      </TouchableOpacity>
-
       <MapView
         region={region}
         showsUserLocation
@@ -121,6 +101,6 @@ export function ViewNotepadScreen({ navigation, route }) {
       >
         <MapMarker key={id} coordinate={coords} />
       </MapView>
-    </View>
+    </Container>
   );
 }

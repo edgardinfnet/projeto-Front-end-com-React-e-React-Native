@@ -8,10 +8,10 @@ import { api } from '../../api';
 import screens from '../../assets/json/screens.json';
 import { Button } from '../components/Button';
 import { TextInputField } from '../components/TextField';
-import { LatLongText } from '../components/LatLongText';
 import { Label } from '../components/Label';
 import { Container } from '../components/Container';
 import { ErrorMessage } from '../components/ErrorMessage';
+import { TextSmall } from '../components/TextSmall';
 
 const coordsDelta = 0.1;
 const initMessage = 'buscando sua localização...';
@@ -165,10 +165,10 @@ export function CreateNotepadCoordsScreen({ navigation, route }) {
             <MapMarker coordinate={coords} />
           </MapView>
 
-          <LatLongText>
+          <TextSmall>
             latitude: {coords.latitude} / longitude:
             {coords.longitude}
-          </LatLongText>
+          </TextSmall>
         </Container>
       )}
     </Formik>
