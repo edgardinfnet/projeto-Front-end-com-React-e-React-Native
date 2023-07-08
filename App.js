@@ -15,6 +15,7 @@ import { ListNotepadScreen } from './src/screens/ListNotepadScreen';
 import { ProExperienceScreen } from './src/screens/ProExperienceScreen';
 import { ViewNotepadScreen } from './src/screens/ViewNotepadScreen';
 import { EditNotepadScreen } from './src/screens/EditNotepadScreen';
+import { CreateNotepadCoordsScreen } from './src/screens/CreateNotepadCoordsScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -22,7 +23,15 @@ export default function App() {
   return (
     <RootSiblingParent>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName={screens.home}>
+        <Drawer.Navigator
+          initialRouteName={screens.home}
+          // screenOptions={{
+          //   drawerStyle: {
+          //     backgroundColor: 'red',
+          //     zIndex: 100,
+          //   },
+          // }}
+        >
           <Drawer.Screen
             name={screens.home}
             component={HomeScreen}
@@ -62,6 +71,15 @@ export default function App() {
             options={{
               headerTitle: textsLabel.listNotepadsLabel,
               drawerLabel: textsLabel.listNotepadsLabel,
+            }}
+          />
+
+          <Drawer.Screen
+            name={screens.CreateNotepadsCoords}
+            component={CreateNotepadCoordsScreen}
+            options={{
+              headerTitle: textsLabel.createNotepadLabel,
+              drawerLabel: textsLabel.createNotepadLabel,
             }}
           />
 

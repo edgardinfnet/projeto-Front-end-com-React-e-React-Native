@@ -1,10 +1,10 @@
 {
   "academicEducationLabel": "Formação Acadêmica",
   "contactLabel": "Contato",
-  "createNotepadLabel": "Criar notepad",
-  "editNotepadLabel": "Editar notepad",
+  "createNotepadLabel": "Criar bloco de notas",
+  "editNotepadLabel": "Editar bloco de notas",
   "homeLabel": "Início",
-  "listNotepadsLabel": "Notepads",
+  "listNotepadsLabel": "Bloco de notas",
   "proExperienceLabel": "Experiência Profissional",
-  "viewNotepadLabel": "Ver notepad"
+  "viewNotepadLabel": "Ver bloco de notas"
 }

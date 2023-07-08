@@ -67,9 +67,9 @@ export function ViewNotepadScreen({ navigation, route }) {
   }
 
   async function onPressDeleteNotepad() {
-    // const response = await api.delete(`/notepads/${notepadId}`);
-    // Toast.show('Notepad deletado com sucesso :)');
-    // navigation.navigate(screens.listNotepads);
+    const response = await api.delete(`/notepads/${notepadId}`);
+    Toast.show('Notepad deletado com sucesso :)');
+    navigation.navigate(screens.listNotepads);
   }
 
   function teste() {

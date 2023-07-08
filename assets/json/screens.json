@@ -1,9 +1,10 @@
 {
   "home": "Home",
   "viewNotepad": "ViewNotepad",
-  "createNotepad": "CreateNotepad",
   "editNotepad": "EditNotepad",
+  "createNotepad": "CreateNotepad",
   "listNotepads": "ListNotepads",
+  "CreateNotepadsCoords": "CreateNotepadsCoords",
   "academicEducation": "AcademicEducation",
   "contact": "Contact",
   "proExperience": "ProExperience"
