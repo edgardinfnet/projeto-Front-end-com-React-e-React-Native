@@ -16,6 +16,7 @@ import { ProExperienceScreen } from './src/screens/ProExperienceScreen';
 import { ViewNotepadScreen } from './src/screens/ViewNotepadScreen';
 import { EditNotepadScreen } from './src/screens/EditNotepadScreen';
 import { CreateNotepadCoordsScreen } from './src/screens/CreateNotepadCoordsScreen';
+import { ConfirmScreen } from './src/screens/ConfirmScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -75,7 +76,7 @@ export default function App() {
           />
 
           <Drawer.Screen
-            name={screens.CreateNotepadsCoords}
+            name={screens.createNotepadsCoords}
             component={CreateNotepadCoordsScreen}
             options={{
               headerTitle: textsLabel.createNotepadLabel,
@@ -89,6 +90,18 @@ export default function App() {
             options={{
               headerTitle: textsLabel.viewNotepadLabel,
               drawerLabel: textsLabel.viewNotepadLabel,
+              drawerItemStyle: {
+                height: 0,
+              },
+            }}
+          />
+
+          <Drawer.Screen
+            name={screens.confirm}
+            component={ConfirmScreen}
+            options={{
+              headerTitle: textsLabel.ConfirmLabel,
+              drawerLabel: textsLabel.ConfirmLabel,
               drawerItemStyle: {
                 height: 0,
               },

@@ -4,8 +4,9 @@
   "editNotepad": "EditNotepad",
   "createNotepad": "CreateNotepad",
   "listNotepads": "ListNotepads",
-  "CreateNotepadsCoords": "CreateNotepadsCoords",
+  "createNotepadsCoords": "CreateNotepadsCoords",
   "academicEducation": "AcademicEducation",
   "contact": "Contact",
-  "proExperience": "ProExperience"
+  "proExperience": "ProExperience",
+  "confirm": "Confirm"
 }

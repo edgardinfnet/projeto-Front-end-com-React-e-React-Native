@@ -26,7 +26,7 @@ export function Card({
         </TextCreated_at>
         {latitude && longitude && (
           <TextSmall>
-            latitude: {latitude} / longitude{longitude}
+            lat: {latitude} / long: {longitude}
           </TextSmall>
         )}
       </CardContainer>

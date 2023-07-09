@@ -6,12 +6,13 @@ import { Formik } from 'formik';
 import { notepadSchema } from '../notepadSchema';
 import { api } from '../../api';
 import screens from '../../assets/json/screens.json';
-import { Button } from '../components/Button';
 import { TextInputField } from '../components/TextField';
 import { Label } from '../components/Label';
 import { Container } from '../components/Container';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { TextSmall } from '../components/TextSmall';
+import styled from 'styled-components/native';
+import { Button } from '../components/Button';
 
 const coordsDelta = 0.1;
 const initMessage = 'buscando sua localização...';
@@ -26,6 +27,9 @@ const initValues = {
   subtitle: '',
   content: '',
 };
+const CreateButton = styled(Button)`
+  background-color: #3c6382;
+`;
 
 export function CreateNotepadCoordsScreen({ navigation, route }) {
   const [locationMesssage, setLocationMessage] = useState(initMessage);
@@ -62,7 +66,7 @@ export function CreateNotepadCoordsScreen({ navigation, route }) {
         longitude: coords.longitude,
       });
       resetForm({});
-      Toast.show('Notepad criado com sucesso :)');
+      Toast.show('Anotação criada com sucesso :)');
       navigation.navigate(screens.listNotepads);
     } catch (error) {
       Toast.show('Ocorreu um erro inexperado :(');
@@ -138,7 +142,8 @@ export function CreateNotepadCoordsScreen({ navigation, route }) {
             numberOfLines={3}
           />
 
-          <Button onPress={handleSubmit}>Criar</Button>
+          {/* <ButtonSave onPress={handleSubmit}>Criar</ButtonSave> */}
+          <CreateButton onPress={handleSubmit}>Criar</CreateButton>
 
           <MapView
             initialRegion={initialCoords}
