@@ -81,7 +81,7 @@ export function CardDescription() {
 
         <View style={styles.marginText}>
           <Text style={styles.commentText}>
-            Rio de Janeiro, 09 de junho de 2023.
+            Rio de Janeiro, 09 de julho de 2023.
           </Text>
         </View>
         <View style={styles.marginText}>
