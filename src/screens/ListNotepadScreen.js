@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { api } from '../../api';
 import screens from '../../assets/json/screens.json';
+import { useGlobalStore } from '../useGlobalStore';
 import { Card } from '../components/Card';
 import Toast from 'react-native-root-toast';
+import { LoadingSimple } from '../components/LoadingSimple';
 
 export function ListNotepadScreen({ navigation, route }) {
-  // const [count, setcount] = useState(0);
   const [notepads, setNotepads] = useState([]);
+  const isLoading = useGlobalStore((state) => state.isLoading);
 
   async function loadNotepads() {
     // const response = await api.delete(`/notepads/${512}`);
@@ -17,7 +19,6 @@ export function ListNotepadScreen({ navigation, route }) {
     try {
       const response = await api.get('/notepads');
       setNotepads(response.data.notepads);
-      // setcount(response.data.count);
     } catch (error) {
       Toast.show('Ocorreu um erro :(');
       console.log(error);
@@ -39,11 +40,16 @@ export function ListNotepadScreen({ navigation, route }) {
   }, []);
 
   return (
-    <FlatList
-      data={notepads}
-      renderItem={({ item }) => (
-        <Card {...item} onPress={() => onPressViewNotepad(item)} />
+    <View>
+      {isLoading && <LoadingSimple></LoadingSimple>}
+      {!isLoading && (
+        <FlatList
+          data={notepads}
+          renderItem={({ item }) => (
+            <Card {...item} onPress={() => onPressViewNotepad(item)} />
+          )}
+        />
       )}
-    />
+    </View>
   );
 }

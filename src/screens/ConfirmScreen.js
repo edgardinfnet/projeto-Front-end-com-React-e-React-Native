@@ -2,10 +2,13 @@ import { useEffect } from 'react';
 import styled from 'styled-components/native';
 import Toast from 'react-native-root-toast';
 import { api } from '../../api';
+import { useGlobalStore } from '../useGlobalStore';
 import textsLabel from '../../assets/json/textsLabel.json';
 import screens from '../../assets//json/screens.json';
 import { Button } from '../components/Button';
 import { Container } from '../components/Container';
+import { View } from 'react-native';
+import { LoadingSimple } from '../components/LoadingSimple';
 
 const ButtonBack = styled(Button)`
   background-color: #ffa502;
@@ -30,10 +33,7 @@ const TextConfirm = styled.Text`
 
 export function ConfirmScreen({ navigation, route }) {
   const notepadId = route.params.id;
-
-  function teste() {
-    alert('ok');
-  }
+  const isLoading = useGlobalStore((state) => state.isLoading);
 
   async function onPressDeleteNotepad() {
     const response = await api.delete(`/notepads/${notepadId}`);
@@ -53,11 +53,18 @@ export function ConfirmScreen({ navigation, route }) {
   }, [notepadId]);
 
   return (
-    <Container>
-      <TextWarning>Aviso</TextWarning>
-      <TextConfirm>{textsLabel.deleteConfirm}</TextConfirm>
-      <ButtonConfirm onPress={onPressDeleteNotepad}>Confirmar</ButtonConfirm>
-      <ButtonBack onPress={onPressBackViewNotepad}>Voltar</ButtonBack>
-    </Container>
+    <View>
+      {isLoading && <LoadingSimple></LoadingSimple>}
+      {!isLoading && (
+        <Container>
+          <TextWarning>Aviso</TextWarning>
+          <TextConfirm>{textsLabel.deleteConfirm}</TextConfirm>
+          <ButtonConfirm onPress={onPressDeleteNotepad}>
+            Confirmar
+          </ButtonConfirm>
+          <ButtonBack onPress={onPressBackViewNotepad}>Voltar</ButtonBack>
+        </Container>
+      )}
+    </View>
   );
 }

@@ -5,6 +5,7 @@ import Toast from 'react-native-root-toast';
 import { Formik } from 'formik';
 import { notepadSchema } from '../notepadSchema';
 import { api } from '../../api';
+import { useGlobalStore } from '../useGlobalStore';
 import screens from '../../assets/json/screens.json';
 import { TextInputField } from '../components/TextField';
 import { Label } from '../components/Label';
@@ -13,6 +14,8 @@ import { ErrorMessage } from '../components/ErrorMessage';
 import { TextSmall } from '../components/TextSmall';
 import styled from 'styled-components/native';
 import { Button } from '../components/Button';
+import { LoadingSimple } from '../components/LoadingSimple';
+import { View } from 'react-native';
 
 const coordsDelta = 0.1;
 const initMessage = 'buscando sua localização...';
@@ -32,6 +35,7 @@ const CreateButton = styled(Button)`
 `;
 
 export function CreateNotepadCoordsScreen({ navigation, route }) {
+  const isLoading = useGlobalStore((state) => state.isLoading);
   const [locationMesssage, setLocationMessage] = useState(initMessage);
   const [coords, setCoords] = useState({
     latitude: 0,
@@ -91,91 +95,96 @@ export function CreateNotepadCoordsScreen({ navigation, route }) {
   }, []);
 
   return (
-    <Formik
-      initialValues={initValues}
-      validationSchema={notepadSchema}
-      onSubmit={onSubmit}
-    >
-      {({ values, errors, handleChange, handleBlur, handleSubmit }) => (
-        <Container>
-          <Label>
-            {errors.title ? (
-              <ErrorMessage>{errors.title.toString()}</ErrorMessage>
-            ) : (
-              'Título'
-            )}
-          </Label>
-          <TextInputField
-            placeholder='Digite um subtítulo'
-            onChangeText={handleChange('title')}
-            onBlur={handleBlur('title')}
-            value={values.title}
-          ></TextInputField>
+    <View>
+      {isLoading && <LoadingSimple></LoadingSimple>}
+      {!isLoading && (
+        <Formik
+          initialValues={initValues}
+          validationSchema={notepadSchema}
+          onSubmit={onSubmit}
+        >
+          {({ values, errors, handleChange, handleBlur, handleSubmit }) => (
+            <Container>
+              <Label>
+                {errors.title ? (
+                  <ErrorMessage>{errors.title.toString()}</ErrorMessage>
+                ) : (
+                  'Título'
+                )}
+              </Label>
+              <TextInputField
+                placeholder='Digite um subtítulo'
+                onChangeText={handleChange('title')}
+                onBlur={handleBlur('title')}
+                value={values.title}
+              ></TextInputField>
 
-          <Label>
-            {errors.subtitle ? (
-              <ErrorMessage>{errors.subtitle.toString()}</ErrorMessage>
-            ) : (
-              'Subtítulo'
-            )}
-          </Label>
-          <TextInputField
-            placeholder='Digite um subtítulo'
-            value={values.subtitle}
-            onChangeText={handleChange('subtitle')}
-            onBlur={handleBlur('subtitle')}
-          />
+              <Label>
+                {errors.subtitle ? (
+                  <ErrorMessage>{errors.subtitle.toString()}</ErrorMessage>
+                ) : (
+                  'Subtítulo'
+                )}
+              </Label>
+              <TextInputField
+                placeholder='Digite um subtítulo'
+                value={values.subtitle}
+                onChangeText={handleChange('subtitle')}
+                onBlur={handleBlur('subtitle')}
+              />
 
-          <Label>
-            {errors.content ? (
-              <ErrorMessage>{errors.content.toString()}</ErrorMessage>
-            ) : (
-              'Comentário'
-            )}
-          </Label>
-          <TextInputField
-            placeholder='Digite um comentário'
-            value={values.content}
-            onChangeText={handleChange('content')}
-            onBlur={handleBlur('content')}
-            multiline
-            numberOfLines={3}
-          />
+              <Label>
+                {errors.content ? (
+                  <ErrorMessage>{errors.content.toString()}</ErrorMessage>
+                ) : (
+                  'Comentário'
+                )}
+              </Label>
+              <TextInputField
+                placeholder='Digite um comentário'
+                value={values.content}
+                onChangeText={handleChange('content')}
+                onBlur={handleBlur('content')}
+                multiline
+                numberOfLines={3}
+              />
 
-          {/* <ButtonSave onPress={handleSubmit}>Criar</ButtonSave> */}
-          <CreateButton onPress={handleSubmit}>Criar</CreateButton>
+              {/* <ButtonSave onPress={handleSubmit}>Criar</ButtonSave> */}
+              <CreateButton onPress={handleSubmit}>Criar</CreateButton>
 
-          <MapView
-            initialRegion={initialCoords}
-            region={{
-              latitude: coords.latitude,
-              longitude: coords.longitude,
-              // ...coords,
-              latitudeDelta: coordsDelta,
-              longitudeDelta: coordsDelta,
-            }}
-            showsUserLocation
-            style={{ width: '100%', height: '50%' }}
-            provider={PROVIDER_GOOGLE}
-            onLongPress={(event) => {
-              const coordsMap = event.nativeEvent.coordinate;
-              setCoords({
-                latitude: coordsMap.latitude,
-                longitude: coordsMap.longitude,
-              });
-              setLocationMessage('Nova coordenada adicionada');
-              Toast.show('Nova coordenada adicionada');
-            }}
-          >
-            <MapMarker coordinate={coords} />
-          </MapView>
+              <MapView
+                initialRegion={initialCoords}
+                region={{
+                  latitude: coords.latitude,
+                  longitude: coords.longitude,
+                  // ...coords,
+                  latitudeDelta: coordsDelta,
+                  longitudeDelta: coordsDelta,
+                }}
+                showsUserLocation
+                style={{ width: '100%', height: '50%' }}
+                provider={PROVIDER_GOOGLE}
+                onLongPress={(event) => {
+                  const coordsMap = event.nativeEvent.coordinate;
+                  setCoords({
+                    latitude: coordsMap.latitude,
+                    longitude: coordsMap.longitude,
+                  });
+                  setLocationMessage('Nova coordenada adicionada');
+                  Toast.show('Nova coordenada adicionada');
+                }}
+              >
+                <MapMarker coordinate={coords} />
+              </MapView>
 
-          <TextSmall>
-            latitude: {coords.latitude} / longitude:
-            {coords.longitude}
-          </TextSmall>
-        </Container>
+              <TextSmall>
+                latitude: {coords.latitude} / longitude:
+                {coords.longitude}
+              </TextSmall>
+            </Container>
+          )}
+        </Formik>
       )}
-    </Formik>
+    </View>
   );
 }
