@@ -57,7 +57,6 @@ export function EditNotepadScreen({ navigation, route }) {
 
   async function onSubmit({ title, subtitle, content, latitude, longitude }) {
     //,{ resetForm }
-    console.log(title);
     try {
       if (latitude === undefined || longitude === undefined) {
         const response = await api.patch(`/notepads/${notepadId}`, {
@@ -73,8 +72,6 @@ export function EditNotepadScreen({ navigation, route }) {
           latitude,
           longitude,
         });
-
-        console.log({ title });
       }
       // resetForm({});
       Toast.show('Anotação atualizado com sucesso :)');
