@@ -42,31 +42,6 @@ export default function App() {
             }}
           />
           <Drawer.Screen
-            name={screens.proExperience}
-            component={ProExperienceScreen}
-            options={{
-              headerTitle: textsLabel.proExperienceLabel,
-              drawerLabel: textsLabel.proExperienceLabel,
-            }}
-          />
-          <Drawer.Screen
-            name={screens.academicEducation}
-            component={AcademicEducationScreen}
-            options={{
-              headerTitle: textsLabel.academicEducationLabel,
-              drawerLabel: textsLabel.academicEducationLabel,
-            }}
-          />
-          <Drawer.Screen
-            name={screens.contact}
-            component={ContactScreen}
-            options={{
-              headerTitle: textsLabel.contactLabel,
-              drawerLabel: textsLabel.contactLabel,
-            }}
-          />
-
-          <Drawer.Screen
             name={screens.listNotepads}
             component={ListNotepadScreen}
             options={{
@@ -114,6 +89,39 @@ export default function App() {
             options={{
               headerTitle: textsLabel.editNotepadLabel,
               drawerLabel: textsLabel.editNotepadLabel,
+              drawerItemStyle: {
+                height: 0,
+              },
+            }}
+          />
+          <Drawer.Screen
+            name={screens.proExperience}
+            component={ProExperienceScreen}
+            options={{
+              headerTitle: textsLabel.proExperienceLabel,
+              drawerLabel: textsLabel.proExperienceLabel,
+              drawerItemStyle: {
+                height: 0,
+              },
+            }}
+          />
+          <Drawer.Screen
+            name={screens.academicEducation}
+            component={AcademicEducationScreen}
+            options={{
+              headerTitle: textsLabel.academicEducationLabel,
+              drawerLabel: textsLabel.academicEducationLabel,
+              drawerItemStyle: {
+                height: 0,
+              },
+            }}
+          />
+          <Drawer.Screen
+            name={screens.contact}
+            component={ContactScreen}
+            options={{
+              headerTitle: textsLabel.contactLabel,
+              drawerLabel: textsLabel.contactLabel,
               drawerItemStyle: {
                 height: 0,
               },
