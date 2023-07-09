@@ -59,7 +59,7 @@ export function CardDescription() {
 
         <View style={styles.marginText}>
           <Text style={styles.commentText}>
-            Todo projeto foi desenvolvido com as tecnologias de abordadas pelo
+            Todo projeto foi desenvolvido com as tecnologias abordadas pelo
             professor Eduardo Gabriel Velho durante suas aulas e pelos monitores
             nas monitorias. Foi utilizada a IDE Visual Studio Code e os códigos
             fonte podem ser acessado no repositório do GitHub abaixo:
